@@ -5,4 +5,6 @@ module com.example.niccolo_zanieri_swe {
 
     opens com.example.niccolo_zanieri_swe to javafx.fxml;
     exports com.example.niccolo_zanieri_swe;
+    exports com.example.niccolo_zanieri_swe.controller;
+    opens com.example.niccolo_zanieri_swe.controller to javafx.fxml;
 }

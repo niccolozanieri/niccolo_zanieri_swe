@@ -1,4 +1,4 @@
-package com.example.niccolo_zanieri_swe;
+package com.example.niccolo_zanieri_swe.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
