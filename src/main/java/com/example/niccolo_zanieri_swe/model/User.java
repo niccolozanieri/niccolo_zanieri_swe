@@ -19,36 +19,27 @@ public abstract class User {
     }
 
     public boolean isFollowed(User u) {
-         return followed.containsKey(u.username);
+        return followed.containsKey(u.username);
     }
 
     public void follow(User u) {
         if(this.isFollowed(u))
             throw new IllegalArgumentException("Selected user is already followed.");
-    }
-    
-    public Map<Tags, Integer> getLikesPerTag() {
-        return likesPerTag;
+        else {
+            followed.put(u.username, u);
+        }
     }
 
-    public void setLikesPerTag(Map<Tags, Integer> likesPerTag) {
-        this.likesPerTag = likesPerTag;
+    public Map<Tags, Integer> getLikesPerTag() {
+        return likesPerTag;
     }
 
     public Hashtable<String, User> getFollowed() {
         return followed;
     }
 
-    public void setFollowed(Hashtable<String, User> followed) {
-        this.followed = followed;
-    }
-
     public ArrayList<Tags> getFavouriteTags() {
         return favouriteTags;
-    }
-
-    public void setFavouriteTags(ArrayList<Tags> favouriteTags) {
-        this.favouriteTags = favouriteTags;
     }
 
     public String getUsername() {
@@ -73,6 +64,17 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int[] getLikesIntArray() {
+        int[] likes = new int[likesPerTag.size()];
+        int i = 0;
+        for(Integer j : likesPerTag.values()) {
+            likes[i] = j;
+            i++;
+        }
+
+        return likes;
     }
 
     private Map<Tags, Integer> likesPerTag = new EnumMap<>(Tags.class);
