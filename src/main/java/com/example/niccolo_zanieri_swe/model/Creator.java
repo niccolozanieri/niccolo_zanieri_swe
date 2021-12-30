@@ -8,6 +8,10 @@ enum Specializations {
 }
 
 public class Creator extends User {
+    public Creator(String usr, String email, String psw) {
+        super(usr, email, psw);
+    }
+
     public Creator(String usr, String email, String psw, Tags[] tags, Specializations[] specs) {
         super(usr, email, psw, tags);
 

@@ -7,10 +7,14 @@ enum Tags {
 }
 
 public abstract class User {
-    public User(String usr, String email, String psw, Tags[] tags) {
+    public User(String usr, String email, String psw) {
         username = usr;
         this.email = email;
         password = psw;
+    }
+
+    public User(String usr, String email, String psw, Tags[] tags) {
+        this(usr, email, psw);
 
         Collections.addAll(favouriteTags, tags);
         for(Tags tag : Tags.values()) {
@@ -23,8 +27,8 @@ public abstract class User {
     }
 
     public void follow(User u) {
-        if(this.isFollowed(u))
-            throw new IllegalArgumentException("Selected user is already followed.");
+    if(this.isFollowed(u) || u == this)
+            throw new IllegalArgumentException("Can't follow yourself or someone already followed.");
         else {
             followed.put(u.username, u);
         }
@@ -34,7 +38,7 @@ public abstract class User {
         return likesPerTag;
     }
 
-    public Hashtable<String, User> getFollowed() {
+     Hashtable<String, User> getFollowed() {
         return followed;
     }
 

@@ -28,4 +28,28 @@ public class UserTests {
         Assertions.assertEquals(Tags.MOTION_GRAPHIC, u.getFavouriteTags().get(1));
 
     }
+
+    @Test void UserIsFollowedTest() {
+
+        User other_user = new Creator("Otho Baggins", "otho.baggins@hotshire.com", "baggins");
+        Assertions.assertFalse(u.isFollowed(other_user));
+
+        u.getFollowed().put("Otho Baggins", other_user);
+        Assertions.assertTrue(u.isFollowed(other_user));
+    }
+
+    @Test void UserFollowTest() {
+        User other_user = new Creator("Otho Baggins", "otho.baggins@hotshire.com", "baggins");
+        u.follow(other_user);
+
+        Assertions.assertTrue(u.isFollowed(other_user));
+
+        IllegalArgumentException thrown = Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> {u.follow(other_user);},
+                "Expected u.follow(other_user) to throw, but it didn't"
+        );
+
+        Assertions.assertTrue(thrown.getMessage().equals("Can't follow yourself or someone already followed."));
+    }
 }
