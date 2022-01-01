@@ -8,9 +8,9 @@ enum Tags {
 
 public abstract class User {
     public User(String usr, String email, String psw) {
-        username = usr;
+        this.username = usr;
         this.email = email;
-        password = psw;
+        this.password = psw;
     }
 
     public User(String usr, String email, String psw, Tags[] tags) {
