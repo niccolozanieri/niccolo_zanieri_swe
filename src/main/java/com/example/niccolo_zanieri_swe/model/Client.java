@@ -17,7 +17,7 @@ public class Client extends User {
 
         if(c.receiveProposal(e)) {
             this.proposals.add(e);
-        } 
+        }
     }
 
     private ArrayList<EmploymentProposal> proposals = new ArrayList<>();
