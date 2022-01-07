@@ -41,6 +41,21 @@ public class ConnectionPool {
         return connectionPool.size() + usedConnections.size();
     }
 
+    public int getAvailableConnectionsNumber() {
+        return connectionPool.size();
+    }
+
+    public int getOpenConnectionsNumber() throws SQLException {
+        int count = 0;
+        for(Connection c : connectionPool) {
+            if(c.isValid(0)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     private String url;
     private String user;
     private String password;
