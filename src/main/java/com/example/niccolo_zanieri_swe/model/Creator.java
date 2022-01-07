@@ -12,6 +12,12 @@ public class Creator extends User {
         super(usr, email, psw);
     }
 
+    public Creator(String usr, String email, String psw, int max_p) {
+        super(usr, email, psw);
+
+        this.maxProposals = max_p;
+    }
+
     public Creator(String usr, String email, String psw, Tags[] tags, Specializations[] specs) {
         super(usr, email, psw, tags);
 

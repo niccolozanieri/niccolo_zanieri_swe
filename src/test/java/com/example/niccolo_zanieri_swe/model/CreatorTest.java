@@ -19,10 +19,15 @@ public class CreatorTest {
         Specializations[] specs = new Specializations[1];
         specs[0] = Specializations.FILMMAKER;
 
-        c = new Creator("Peregrino Tuc", "peregrino.tuc@hotshire.com", "mushrooms", tags, specs);
+        c = new Creator("Peregrino Tuc", "peregrino.tuc@hotshire.com", "mushrooms", tags, specs, 1);
     }
 
     @Test void CreatorCtorTest() {
         Assertions.assertEquals(Specializations.FILMMAKER, c.getSpecializations().get(0));
+    }
+
+    @Test void ReceiveProposalTest() {
+        Assertions.assertTrue(c.receiveProposal(new EmploymentProposal("test_proposal", 1, 1)));
+        Assertions.assertFalse(c.receiveProposal(new EmploymentProposal("test_proposal", 1, 1)));
     }
 }

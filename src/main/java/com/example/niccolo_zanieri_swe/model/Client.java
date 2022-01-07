@@ -12,12 +12,16 @@ public class Client extends User {
         super(usr, email, psw, tags);
     }
 
-    public void sendEmploymentProposal(String desc, int timeLim, float budget, Creator c) {
+    public boolean sendEmploymentProposal(String desc, int timeLim, float budget, Creator c) {
         EmploymentProposal e = new EmploymentProposal(desc, timeLim, budget);
+        boolean result = false;
 
         if(c.receiveProposal(e)) {
             this.proposals.add(e);
+            result = true;
         }
+
+        return result;
     }
 
     private ArrayList<EmploymentProposal> proposals = new ArrayList<>();
