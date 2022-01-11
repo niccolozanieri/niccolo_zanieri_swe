@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.niccolo_zanieri_swe.controller.SessionController">
+   <children>
+      <AnchorPane layoutX="470.0" layoutY="1.0" prefHeight="1079.0" prefWidth="1046.0">
+         <children>
+            <Label layoutX="125.0" layoutY="45.0" />
+            <AnchorPane layoutX="201.0" layoutY="-7.0" prefHeight="262.0" prefWidth="284.0" />
+            <AnchorPane layoutX="278.0" layoutY="273.0" />
+            <ImageView fitHeight="530.0" fitWidth="429.0" layoutX="117.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/karsten-winegeart-60GsdOMRFGc-unsplash.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="553.0" layoutY="666.0" text="Don't have an account?">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ButtonBar layoutX="757.0" layoutY="666.0">
+               <buttons>
+                  <Label fx:id="signUpLabel" prefHeight="20.0" prefWidth="94.0" text="Sign Up">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </buttons>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ButtonBar>
+            <TextField focusTraversable="false" layoutX="553.0" layoutY="542.0" prefHeight="52.0" prefWidth="301.0" promptText="password">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </TextField>
+            <TextField focusTraversable="false" layoutX="553.0" layoutY="463.0" prefHeight="50.0" prefWidth="300.0" promptText="username or email">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </TextField>
+            <Label layoutX="564.0" layoutY="191.0" text="Tivity" textFill="#2f3640">
+               <font>
+                  <Font name="DejaVu Serif Bold" size="88.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
