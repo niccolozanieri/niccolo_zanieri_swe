@@ -43,7 +43,7 @@ public class CreatorDAOTest {
                 stmt.executeQuery("delete from creator where username = 'test_usr'");
             } catch(SQLException ignored) {}
 
-            boolean insertResult = dao.insertUser("test_usr", "test_email", "test_psw");
+            boolean insertResult = dao.insertCreator("test_usr", "test_email", "test_psw");
             Assertions.assertTrue(insertResult);
 
             ResultSet rs = stmt.executeQuery("select * from creator where username = 'test_usr'");
@@ -59,9 +59,40 @@ public class CreatorDAOTest {
                 pool.releaseConnection(c);
             }
         }
-
-
     }
+
+    @Test
+    void removeCreatorTest() {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            c = pool.getConnection();
+            stmt = c.createStatement();
+
+            try {
+                stmt.executeQuery("insert into creator values('test_usr', 'test_email', 'test_psw');");
+            } catch(SQLException ignored) {}
+
+            boolean insertResult = dao.removeCreator("test_usr");
+            Assertions.assertTrue(insertResult);
+
+            ResultSet rs = stmt.executeQuery("select * from creator where username = 'test_usr'");
+            Assertions.assertFalse(rs.next());
+
+            rs.close();
+            stmt.close();
+        } catch(SQLException e) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.exit(0);
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+    }
+
+
 
     @AfterAll
     void tearDown() {
