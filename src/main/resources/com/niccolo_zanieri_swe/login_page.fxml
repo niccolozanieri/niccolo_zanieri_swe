@@ -28,7 +28,7 @@
             </Label>
             <ButtonBar layoutX="757.0" layoutY="666.0">
                <buttons>
-                  <Label fx:id="signUpLabel" prefHeight="20.0" prefWidth="94.0" text="Sign Up" onMouseClicked="#switchToSignUp">
+                  <Label id="signUpLabel" prefHeight="20.0" prefWidth="94.0" text="Sign Up" onMouseClicked="#switchToSignUp">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

@@ -1,5 +1,6 @@
 package com.niccolo_zanieri_swe.dao;
 
+import java.net.CookieHandler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectionPool {
-    public ConnectionPool(String url, String usr, String psw, List<Connection> pool) {
+    private ConnectionPool(String url, String usr, String psw, List<Connection> pool) {
         this.url = url;
         this.password = psw;
         this.user = usr;
@@ -23,8 +24,14 @@ public class ConnectionPool {
     }
 
     public Connection getConnection() {
-        Connection connection = connectionPool.remove(connectionPool.size() - 1);
-        usedConnections.add(connection);
+        Connection connection;
+        if(connectionPool.size() > 0) {
+            connection = connectionPool.remove(connectionPool.size() - 1);
+            usedConnections.add(connection);
+        } else {
+            connection = null;
+        }
+
         return connection;
     }
 
@@ -54,6 +61,18 @@ public class ConnectionPool {
         }
 
         return count;
+    }
+
+    public void releaseEveryConnection() {
+        ArrayList<Connection> connections = new ArrayList<>(usedConnections);
+        try {
+            for(Connection conn : connections) {
+                this.releaseConnection(conn);
+            }
+        } catch(Exception e) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            this.usedConnections = connections;
+        }
     }
 
     private String url;

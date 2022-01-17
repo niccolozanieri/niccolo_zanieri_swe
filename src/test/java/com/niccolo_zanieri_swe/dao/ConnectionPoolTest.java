@@ -16,7 +16,7 @@ public class ConnectionPoolTest {
     @BeforeEach void setUpPool() {
         url = "jdbc:postgresql://localhost:5432/swe_exam_db";
         usr = "niccolo_zanieri";
-        psw = "Aut29SisOp30Fis230";
+        psw = "basidati2022";
 
         try {
             pool = ConnectionPool.create(url, usr, psw);
@@ -44,6 +44,15 @@ public class ConnectionPoolTest {
     @Test void ReleaseConnectionTest() {
         Connection test_conn = pool.getConnection();
         pool.releaseConnection(test_conn);
+        Assertions.assertEquals(10, pool.getAvailableConnectionsNumber());
+    }
+
+    @Test void ReleaseEveryConnection() {
+        Connection c1 = pool.getConnection();
+        Connection c2 = pool.getConnection();
+        Connection c3 = pool.getConnection();
+
+        pool.releaseEveryConnection();
         Assertions.assertEquals(10, pool.getAvailableConnectionsNumber());
     }
 }
