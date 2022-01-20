@@ -12,9 +12,14 @@ public class Creator extends User {
         super(usr, email, psw);
     }
 
+    public Creator(Creator creator) {
+        super(creator.getUsername(), creator.getEmail(), creator.getPassword());
+        this.specializations.addAll(creator.specializations);
+        this.proposals.addAll(creator.proposals);
+    }
+
     public Creator(String usr, String email, String psw, int max_p) {
         super(usr, email, psw);
-
         this.maxProposals = max_p;
     }
 

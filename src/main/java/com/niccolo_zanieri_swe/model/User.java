@@ -13,6 +13,13 @@ public abstract class User {
         this.password = psw;
     }
 
+    public User(User user) {
+        this(user.username, user.email, user.password);
+        this.likesPerTag.putAll(user.likesPerTag);
+        this.followed.putAll(user.followed);
+        this.favouriteTags.addAll(user.favouriteTags);
+    }
+
     public User(String usr, String email, String psw, Tags[] tags) {
         this(usr, email, psw);
 

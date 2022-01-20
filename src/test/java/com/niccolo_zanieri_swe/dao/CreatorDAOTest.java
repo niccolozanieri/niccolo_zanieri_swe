@@ -45,8 +45,7 @@ public class CreatorDAOTest {
                 stmt.executeQuery("delete from creator where username = 'test_usr'");
             } catch(SQLException ignored) {}
 
-            boolean insertResult = dao.insertCreator("test_usr", "test_email", "test_psw");
-            Assertions.assertTrue(insertResult);
+            dao.insertCreator("test_usr", "test_email", "test_psw");
 
             ResultSet rs = stmt.executeQuery("select * from creator where username = 'test_usr'");
             Assertions.assertTrue(rs.next());
@@ -83,8 +82,7 @@ public class CreatorDAOTest {
                 System.err.println("");
             }
 
-            boolean insertResult = dao.removeCreator("test_usr");
-            Assertions.assertTrue(insertResult);
+            dao.removeCreator("test_usr");
 
             ResultSet rs = stmt.executeQuery("select * from creator where username = 'test_usr'");
             Assertions.assertFalse(rs.next());
@@ -109,13 +107,26 @@ public class CreatorDAOTest {
             c = pool.getConnection();
             stmt = c.createStatement();
 
-            User followed = new Creator("test_usr1", "test_email1", "test_psw1");
-            User follower = new Creator("test_usr2", "test_email2", "test_psw2");
+            Creator followed = new Creator("test_usr1", "test_email1", "test_psw1");
+            Creator follower = new Creator("test_usr2", "test_email2", "test_psw2");
+            dao.insertCreator(followed.getUsername(), followed.getEmail(), followed.getPassword());
+            dao.insertCreator(follower.getUsername(), follower.getEmail(), follower.getPassword());
+            dao.followUser(followed, follower);
+
             SQLException thrown = Assertions.assertThrows(
                     SQLException.class,
                     () -> {dao.followUser(followed, follower);},
                     "Expected dao.followUser(followed, follower) to throw, but it didn't"
             );
+
+            String sql = "select * from followedByCreator where followed_usr='test_usr1' and follower_usr='test_usr2'";
+            ResultSet rs = stmt.executeQuery(sql);
+            Assertions.assertTrue(rs.next());
+
+            dao.removeCreator(followed.getUsername());
+            dao.removeCreator(follower.getUsername());
+            rs = stmt.executeQuery(sql);
+            Assertions.assertFalse(rs.next());
 
             stmt.close();
         } catch(SQLException e) {
@@ -126,8 +137,6 @@ public class CreatorDAOTest {
             }
         }
     }
-
-
 
     @AfterAll
     void tearDown() {

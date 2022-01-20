@@ -11,8 +11,7 @@ public class CreatorDAO {
         this.pool = pool;
     }
 
-    public boolean insertCreator(String usr, String email, String psw) throws SQLException {
-        boolean result = false;
+    public void insertCreator(String usr, String email, String psw) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
@@ -23,19 +22,15 @@ public class CreatorDAO {
             Statement stmt = c.createStatement();
             String sql = "insert into creator values('" + usr + "', '" + email + "', '" + psw + "');";
             stmt.executeUpdate(sql);
-            result = true;
             stmt.close();
         } finally {
             if(c != null) {
                 pool.releaseConnection(c);
             }
         }
-
-        return result;
     }
 
-    public boolean removeCreator(String usr) throws SQLException  {
-        boolean result = false;
+    public void removeCreator(String usr) throws SQLException  {
         Connection c = null;
         try {
             c = pool.getConnection();
@@ -46,19 +41,15 @@ public class CreatorDAO {
             Statement stmt = c.createStatement();
             String sql = "delete from creator where username = '" + usr + "';";
             stmt.executeUpdate(sql);
-            result = true;
             stmt.close();
         } finally {
             if(c != null) {
                 pool.releaseConnection(c);
             }
         }
-
-        return result;
     }
 
-    public boolean followUser(User followed, User follower) throws SQLException {
-        boolean result = false;
+    public void followUser(User followed, User follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
@@ -67,11 +58,10 @@ public class CreatorDAO {
             }
 
             String followedUsr = followed.getUsername();
-            String followerUsr = followed.getUsername();
+            String followerUsr = follower.getUsername();
             Statement stmt = c.createStatement();
             String sql = "insert into FollowedByCreator values('" + followedUsr +"', '" + followerUsr + "');";
             stmt.executeUpdate(sql);
-            result = true;
             stmt.close();
         } finally {
             if(c != null) {
@@ -79,7 +69,6 @@ public class CreatorDAO {
             }
         }
 
-        return result;
     }
 
     private ConnectionPool pool;
