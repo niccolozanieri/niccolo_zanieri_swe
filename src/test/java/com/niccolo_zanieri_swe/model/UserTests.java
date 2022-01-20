@@ -31,22 +31,22 @@ public class UserTests {
 
     @Test void UserIsFollowedTest() {
 
-        User other_user = new Creator("Otho Baggins", "otho.baggins@hotshire.com", "baggins");
-        Assertions.assertFalse(u.isFollowed(other_user));
+        Creator creator = new Creator("Otho Baggins", "otho.baggins@hotshire.com", "baggins");
+        Assertions.assertFalse(u.isFollowed(creator));
 
-        u.getFollowed().put("Otho Baggins", other_user);
-        Assertions.assertTrue(u.isFollowed(other_user));
+        u.getFollowed().put("Otho Baggins", creator);
+        Assertions.assertTrue(u.isFollowed(creator));
     }
 
     @Test void UserFollowTest() {
-        User other_user = new Creator("Otho Baggins", "otho.baggins@hotshire.com", "baggins");
-        u.follow(other_user);
+        Creator creator = new Creator("Otho Baggins", "otho.baggins@hotshire.com", "baggins");
+        u.follow(creator);
 
-        Assertions.assertTrue(u.isFollowed(other_user));
+        Assertions.assertTrue(u.isFollowed(creator));
 
         IllegalArgumentException thrown = Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> {u.follow(other_user);},
+                () -> {u.follow(creator);},
                 "Expected u.follow(other_user) to throw, but it didn't"
         );
 

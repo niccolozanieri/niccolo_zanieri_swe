@@ -7,12 +7,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreatorDAO {
-    public CreatorDAO(ConnectionPool pool) {
+public class ClientDAO {
+    public ClientDAO(ConnectionPool pool) {
         this.pool = pool;
     }
 
-    public void insertCreator(String usr, String email, String psw) throws SQLException {
+    public void insertClient(String usr, String email, String psw) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
@@ -21,7 +21,7 @@ public class CreatorDAO {
             }
 
             Statement stmt = c.createStatement();
-            String sql = "insert into creator values('" + usr + "', '" + email + "', '" + psw + "');";
+            String sql = "insert into client values('" + usr + "', '" + email + "', '" + psw + "');";
             stmt.executeUpdate(sql);
             stmt.close();
         } finally {
@@ -31,7 +31,7 @@ public class CreatorDAO {
         }
     }
 
-    public void removeCreator(String usr) throws SQLException  {
+    public void removeClient(String usr) throws SQLException  {
         Connection c = null;
         try {
             c = pool.getConnection();
@@ -40,7 +40,7 @@ public class CreatorDAO {
             }
 
             Statement stmt = c.createStatement();
-            String sql = "delete from creator where username = '" + usr + "';";
+            String sql = "delete from client where username = '" + usr + "';";
             stmt.executeUpdate(sql);
             stmt.close();
         } finally {
@@ -61,7 +61,7 @@ public class CreatorDAO {
             String followedUsr = followed.getUsername();
             String followerUsr = follower.getUsername();
             Statement stmt = c.createStatement();
-            String sql = "insert into FollowedByCreator values('" + followedUsr +"', '" + followerUsr + "');";
+            String sql = "insert into FollowedByClient values('" + followedUsr +"', '" + followerUsr + "');";
             stmt.executeUpdate(sql);
             stmt.close();
         } finally {
@@ -83,7 +83,7 @@ public class CreatorDAO {
             String followedUsr = followed.getUsername();
             String followerUsr = follower.getUsername();
             Statement stmt = c.createStatement();
-            String sql = "delete from FollowedByCreator where followed_usr='" + followedUsr + "' and follower_usr='" + followerUsr +"';";
+            String sql = "delete from FollowedByClient where followed_usr='" + followedUsr + "' and follower_usr='" + followerUsr +"';";
             stmt.executeUpdate(sql);
             stmt.close();
         } finally {

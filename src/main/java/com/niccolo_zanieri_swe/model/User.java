@@ -29,15 +29,15 @@ public abstract class User {
         }
     }
 
-    public boolean isFollowed(User u) {
-        return followed.containsKey(u.username);
+    public boolean isFollowed(Creator u) {
+        return followed.containsKey(u.getUsername());
     }
 
-    public void follow(User u) {
+    public void follow(Creator u) {
     if(this.isFollowed(u) || u == this)
             throw new IllegalArgumentException("Can't follow yourself or someone already followed.");
         else {
-            followed.put(u.username, u);
+            followed.put(u.getUsername(), u);
         }
     }
 
