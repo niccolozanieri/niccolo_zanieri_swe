@@ -71,5 +71,26 @@ public class CreatorDAO {
 
     }
 
+    public void unfollowUser(User followed, User follower) throws SQLException {
+        Connection c = null;
+        try {
+            c = pool.getConnection();
+            if(c == null) {
+                throw new RuntimeException("There are no available connections.");
+            }
+
+            String followedUsr = followed.getUsername();
+            String followerUsr = follower.getUsername();
+            Statement stmt = c.createStatement();
+            String sql = "delete from FollowedByCreator where followed_usr='" + followedUsr + "' and follower_usr='" + followerUsr +"';";
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+    }
+
     private ConnectionPool pool;
 }

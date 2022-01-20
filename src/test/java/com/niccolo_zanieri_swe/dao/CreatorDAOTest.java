@@ -98,6 +98,7 @@ public class CreatorDAOTest {
         }
     }
 
+//    should I put following two tests in another class?
     @Test
     void followUserTest() {
         Connection c = null;
@@ -127,6 +128,39 @@ public class CreatorDAOTest {
             dao.removeCreator(follower.getUsername());
             rs = stmt.executeQuery(sql);
             Assertions.assertFalse(rs.next());
+
+            stmt.close();
+        } catch(SQLException e) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+    }
+
+    @Test
+    void unfollowUserTest() {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            c = pool.getConnection();
+            stmt = c.createStatement();
+
+            Creator followed = new Creator("test_usr1", "test_email1", "test_psw1");
+            Creator follower = new Creator("test_usr2", "test_email2", "test_psw2");
+            dao.insertCreator(followed.getUsername(), followed.getEmail(), followed.getPassword());
+            dao.insertCreator(follower.getUsername(), follower.getEmail(), follower.getPassword());
+            dao.followUser(followed, follower);
+            dao.unfollowUser(followed, follower);
+
+            String sql = "select * from followedByCreator where followed_usr='test_usr1' and follower_usr='test_usr2'";
+            ResultSet rs = stmt.executeQuery(sql);
+            Assertions.assertFalse(rs.next());
+
+            dao.removeCreator(followed.getUsername());
+            dao.removeCreator(follower.getUsername());
 
             stmt.close();
         } catch(SQLException e) {
