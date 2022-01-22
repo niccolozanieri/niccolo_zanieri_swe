@@ -50,7 +50,7 @@ public class CreatorDAO {
         }
     }
 
-    public void followUser(Creator followed, User follower) throws SQLException {
+    public void followCreator(Creator followed, User follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
@@ -72,7 +72,7 @@ public class CreatorDAO {
 
     }
 
-    public void unfollowUser(Creator followed, User follower) throws SQLException {
+    public void unfollowCreator(Creator followed, User follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
