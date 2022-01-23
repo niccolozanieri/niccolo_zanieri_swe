@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -17,9 +18,12 @@ import java.util.ResourceBundle;
 
 public class SessionController implements Initializable {
 
-    @FXML
-    private ChoiceBox<String> creatorClientChB = new ChoiceBox<>();
+    @FXML private ChoiceBox<String> creatorClientChB = new ChoiceBox<>();
     private String[] userTypes = {"Creator", "Client"};
+
+    @FXML private TextField userTF;
+    @FXML private TextField emailTF;
+    @FXML private TextField pswTF;
 
     private Stage stage;
     private Scene scene;
@@ -50,5 +54,16 @@ public class SessionController implements Initializable {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("login_page.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void submitForm(MouseEvent event) throws IOException {
+        if(creatorClientChB.getValue().equals("Creator")) {
+            CreatorAdminController creatorCtrl = new CreatorAdminController();
+            creatorCtrl.registerCreator(userTF.getText(), emailTF.getText(), pswTF.getText());
+        } else {
+            ClientAdminController clientCtrl = new ClientAdminController();
+            clientCtrl.registerClient(userTF.getText(), emailTF.getText(), pswTF.getText());
+        }
     }
 }
