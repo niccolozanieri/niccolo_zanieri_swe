@@ -4,7 +4,11 @@ import com.niccolo_zanieri_swe.dao.ClientDAO;
 import com.niccolo_zanieri_swe.dao.ConnectionPool;
 import com.niccolo_zanieri_swe.dao.CreatorDAO;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ClientAdminController {
@@ -21,7 +25,7 @@ public class ClientAdminController {
     }
 
     @FXML
-    public void registerClient(String usr, String email, String psw) {
+    public void registerClient(String usr, String email, String psw) throws IOException {
         try {
             this.dao.insertClient(usr, email, psw);
         } catch(SQLException e) {
@@ -30,4 +34,7 @@ public class ClientAdminController {
     }
 
     private ClientDAO dao;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 }

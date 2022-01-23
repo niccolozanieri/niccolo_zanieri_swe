@@ -4,6 +4,7 @@ import com.niccolo_zanieri_swe.dao.ConnectionPool;
 import com.niccolo_zanieri_swe.dao.CreatorDAO;
 import javafx.fxml.FXML;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreatorAdminController {    // TODO: create pages to show errors
@@ -19,7 +20,7 @@ public class CreatorAdminController {    // TODO: create pages to show errors
     }
     
     @FXML
-    public void registerCreator(String usr, String email, String psw) {
+    public void registerCreator(String usr, String email, String psw) throws IOException {
         try {
             this.dao.insertCreator(usr, email, psw);
         } catch(SQLException e) {
