@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)  // TODO: finish correcting copied code
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ClientDAOTest {
     private ConnectionPool pool;
     private ClientDAO dao;
@@ -21,7 +21,7 @@ public class ClientDAOTest {
         String psw = "basidati2022";
 
         try {
-            pool = ConnectionPool.create(url, usr, psw);
+            pool = ConnectionPool.getConnectionPool(url, usr, psw);
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }

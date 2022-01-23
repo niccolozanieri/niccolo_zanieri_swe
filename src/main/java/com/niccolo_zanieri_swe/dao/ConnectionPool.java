@@ -1,6 +1,5 @@
 package com.niccolo_zanieri_swe.dao;
 
-import java.net.CookieHandler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,12 +14,17 @@ public class ConnectionPool {
         this.connectionPool = pool;
     }
 
-    public static ConnectionPool create(String url, String user, String password) throws SQLException {
-        List<Connection> pool = new ArrayList<>(INITIAL_POOL_SIZE);
-        for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
-            pool.add(ConnectionPool.createConnection(url, user, password));
+    public static ConnectionPool getConnectionPool(String url, String user, String password) throws SQLException {
+        if(ConnectionPool.instance == null) {
+            List<Connection> pool = new ArrayList<>(INITIAL_POOL_SIZE);
+            for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
+                pool.add(ConnectionPool.createConnection(url, user, password));
+            }
+
+            ConnectionPool.instance = new ConnectionPool(url, user, password, pool);
         }
-        return new ConnectionPool(url, user, password, pool);
+
+        return ConnectionPool.instance;
     }
 
     public Connection getConnection() {
@@ -75,6 +79,7 @@ public class ConnectionPool {
         }
     }
 
+    private static ConnectionPool instance = null;
     private String url;
     private String user;
     private String password;

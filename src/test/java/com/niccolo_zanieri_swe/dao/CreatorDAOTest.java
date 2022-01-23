@@ -20,7 +20,7 @@ public class CreatorDAOTest {
         String psw = "basidati2022";
 
         try {
-            pool = ConnectionPool.create(url, usr, psw);
+            pool = ConnectionPool.getConnectionPool(url, usr, psw);
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }

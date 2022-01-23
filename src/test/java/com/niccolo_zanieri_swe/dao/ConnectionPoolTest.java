@@ -19,14 +19,14 @@ public class ConnectionPoolTest {
         psw = "basidati2022";
 
         try {
-            pool = ConnectionPool.create(url, usr, psw);
+            pool = ConnectionPool.getConnectionPool(url, usr, psw);
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Test void CreateConnectionPoolTest() throws SQLException {
-        pool = ConnectionPool.create(url, usr, psw);
+        pool = ConnectionPool.getConnectionPool(url, usr, psw);
         Assertions.assertEquals(pool.getOpenConnectionsNumber(), 10);
         Assertions.assertEquals(10, pool.getSize());
     }
