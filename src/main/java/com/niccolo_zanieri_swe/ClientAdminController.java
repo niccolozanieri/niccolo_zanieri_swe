@@ -13,24 +13,17 @@ import java.sql.SQLException;
 
 public class ClientAdminController {
 
-    public ClientAdminController() {
+    public ClientAdminController() throws SQLException{
         String url = "jdbc:postgresql://localhost:5432/swe_exam_db";
         String usr = "niccolo_zanieri";
         String psw = "basidati2022";
-        try {
-            this.dao = new ClientDAO(ConnectionPool.getConnectionPool(url, usr, psw));
-        } catch(SQLException e) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-        }
+        this.dao = new ClientDAO(ConnectionPool.getConnectionPool(url, usr, psw));
+
     }
 
     @FXML
-    public void registerClient(String usr, String email, String psw) throws IOException {
-        try {
-            this.dao.insertClient(usr, email, psw);
-        } catch(SQLException e) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-        }
+    public void registerClient(String usr, String email, String psw) throws IOException, SQLException {
+        this.dao.insertClient(usr, email, psw);
     }
 
     private ClientDAO dao;

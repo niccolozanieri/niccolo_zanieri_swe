@@ -7,16 +7,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SessionController implements Initializable {
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(creatorClientChB.getItems().isEmpty()) {
@@ -45,35 +48,53 @@ public class SessionController implements Initializable {
     }
 
     @FXML
-    public void switchSuccessSignUpCr() throws IOException {
+    public void switchToSuccessSignUpCr() throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("successful_signup_cr.fxml")));
-        stage = (Stage) (userTF.getScene().getWindow());
+        stage = (Stage)(userTF.getScene().getWindow());
         scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("successful_signup.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    public void switchSuccessSignUpCl() throws IOException {
+    public void switchToSuccessSignUpCl() throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("successful_signup_cl.fxml")));
-        stage = (Stage) (userTF.getScene().getWindow());
+        stage = (Stage)(userTF.getScene().getWindow());
         scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("successful_signup.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
-
+    @FXML
+    public void switchToSignUpError() throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signup_error.fxml")));
+        stage = (Stage) (userTF.getScene().getWindow());
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("signup_error.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     public void submitForm(MouseEvent event) throws IOException {
         if(creatorClientChB.getValue().equals("Creator")) {
-            CreatorAdminController creatorCtrl = new CreatorAdminController();
-            creatorCtrl.registerCreator(userTF.getText(), emailTF.getText(), pswTF.getText());
-            switchSuccessSignUpCr();
+            try {
+                CreatorAdminController creatorCtrl = new CreatorAdminController();
+                creatorCtrl.registerCreator(userTF.getText(), emailTF.getText(), pswTF.getText());
+                switchToSuccessSignUpCr();
+            } catch(SQLException e) {
+                switchToSignUpError();
+            }
         } else {
-            ClientAdminController clientCtrl = new ClientAdminController();
-            clientCtrl.registerClient(userTF.getText(), emailTF.getText(), pswTF.getText());
-            switchSuccessSignUpCl();
+            try {
+                ClientAdminController clientCtrl = new ClientAdminController();
+                clientCtrl.registerClient(userTF.getText(), emailTF.getText(), pswTF.getText());
+                switchToSuccessSignUpCl();
+            } catch(SQLException e) {
+                switchToSignUpError();
+            }
         }
     }
 
@@ -83,6 +104,7 @@ public class SessionController implements Initializable {
     @FXML private TextField userTF;
     @FXML private TextField emailTF;
     @FXML private TextField pswTF;
+
 
     private Stage stage;
     private Scene scene;

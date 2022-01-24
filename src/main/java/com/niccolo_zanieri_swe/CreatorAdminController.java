@@ -8,24 +8,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreatorAdminController {    // TODO: create pages to show errors
-    public CreatorAdminController() {
+    public CreatorAdminController() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/swe_exam_db";
         String usr = "niccolo_zanieri";
         String psw = "basidati2022";
-        try {
-            this.dao = new CreatorDAO(ConnectionPool.getConnectionPool(url, usr, psw));
-        } catch(SQLException e) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-        }
+        this.dao = new CreatorDAO(ConnectionPool.getConnectionPool(url, usr, psw));
+
+
     }
     
     @FXML
-    public void registerCreator(String usr, String email, String psw) throws IOException {
-        try {
-            this.dao.insertCreator(usr, email, psw);
-        } catch(SQLException e) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-        }
+    public void registerCreator(String usr, String email, String psw) throws IOException, SQLException {
+        this.dao.insertCreator(usr, email, psw);
     }
 
     private CreatorDAO dao;
