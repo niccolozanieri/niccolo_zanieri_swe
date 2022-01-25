@@ -141,7 +141,7 @@ public class ClientDAOTest {
     }
 
     @Test
-    void unfollowUserTest() {
+    void unfollowCreatorTest() {
         Connection c = null;
         Statement stmt = null;
 
@@ -163,6 +163,32 @@ public class ClientDAOTest {
 
             cr_dao.removeCreator(followed.getUsername());
             dao.removeClient(follower.getUsername());
+
+            stmt.close();
+        } catch(SQLException e) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+    }
+
+    @Test
+    void findClientTest() {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            c = pool.getConnection();
+            stmt = c.createStatement();
+
+            Assertions.assertNull(dao.findClient("test_usr3"));
+
+            dao.insertClient("test_usr3", "test_email3", "test_psw3");
+            Assertions.assertNotNull(dao.findClient("test_usr3"));
+
+            dao.removeClient("test_usr3");
 
             stmt.close();
         } catch(SQLException e) {

@@ -139,7 +139,7 @@ public class CreatorDAOTest {
     }
 
     @Test
-    void unfollowUserTest() {
+    void unfollowCreatorTest() {
         Connection c = null;
         Statement stmt = null;
 
@@ -170,6 +170,33 @@ public class CreatorDAOTest {
             }
         }
     }
+
+    @Test
+    void findCreatorTest() {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            c = pool.getConnection();
+            stmt = c.createStatement();
+
+            Assertions.assertNull(dao.findCreator("test_usr3"));
+
+            dao.insertCreator("test_usr3", "test_email3", "test_psw3");
+            Assertions.assertNotNull(dao.findCreator("test_usr3"));
+
+            dao.removeCreator("test_usr3");
+
+            stmt.close();
+        } catch(SQLException e) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+    }
+
 
     @AfterAll
     void tearDown() {

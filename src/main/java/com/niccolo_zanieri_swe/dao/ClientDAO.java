@@ -1,9 +1,10 @@
 package com.niccolo_zanieri_swe.dao;
 
+import com.niccolo_zanieri_swe.model.Client;
 import com.niccolo_zanieri_swe.model.Creator;
-import com.niccolo_zanieri_swe.model.User;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -17,7 +18,7 @@ public class ClientDAO {
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             Statement stmt = c.createStatement();
@@ -36,7 +37,7 @@ public class ClientDAO {
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             Statement stmt = c.createStatement();
@@ -50,12 +51,12 @@ public class ClientDAO {
         }
     }
 
-    public void followCreator(Creator followed, User follower) throws SQLException {
+    public void followCreator(Creator followed, Client follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             String followedUsr = followed.getUsername();
@@ -72,12 +73,12 @@ public class ClientDAO {
 
     }
 
-    public void unfollowCreator(Creator followed, User follower) throws SQLException {
+    public void unfollowCreator(Creator followed, Client follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             String followedUsr = followed.getUsername();
@@ -91,6 +92,35 @@ public class ClientDAO {
                 pool.releaseConnection(c);
             }
         }
+    }
+
+    public Client findClient(String usr) throws SQLException {
+        Connection c = null;
+        Client client = null;
+        try {
+            c = pool.getConnection();
+            if(c == null) {
+                throw new SQLException("There are no available connections.");
+            }
+
+            Statement stmt = c.createStatement();
+            String sql = "select * from client where username='" + usr + "';";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if(rs.next()) {
+                String psw = rs.getString("password");
+                String email = rs.getString("email");
+                client = new Client(usr, email, psw);
+            }
+
+            stmt.close();
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+
+        return client;
     }
 
     private ConnectionPool pool;

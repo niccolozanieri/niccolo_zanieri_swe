@@ -1,9 +1,9 @@
 package com.niccolo_zanieri_swe.dao;
 
 import com.niccolo_zanieri_swe.model.Creator;
-import com.niccolo_zanieri_swe.model.User;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -17,7 +17,7 @@ public class CreatorDAO {
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             Statement stmt = c.createStatement();
@@ -36,7 +36,7 @@ public class CreatorDAO {
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             Statement stmt = c.createStatement();
@@ -50,12 +50,12 @@ public class CreatorDAO {
         }
     }
 
-    public void followCreator(Creator followed, User follower) throws SQLException {
+    public void followCreator(Creator followed, Creator follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             String followedUsr = followed.getUsername();
@@ -72,12 +72,12 @@ public class CreatorDAO {
 
     }
 
-    public void unfollowCreator(Creator followed, User follower) throws SQLException {
+    public void unfollowCreator(Creator followed, Creator follower) throws SQLException {
         Connection c = null;
         try {
             c = pool.getConnection();
             if(c == null) {
-                throw new RuntimeException("There are no available connections.");
+                throw new SQLException("There are no available connections.");
             }
 
             String followedUsr = followed.getUsername();
@@ -91,6 +91,35 @@ public class CreatorDAO {
                 pool.releaseConnection(c);
             }
         }
+    }
+
+    public Creator findCreator(String usr) throws SQLException {
+        Connection c = null;
+        Creator creator = null;
+        try {
+            c = pool.getConnection();
+            if(c == null) {
+                throw new SQLException("There are no available connections.");
+            }
+
+            Statement stmt = c.createStatement();
+            String sql = "select * from creator where username='" + usr + "';";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if(rs.next()) {
+                String psw = rs.getString("password");
+                String email = rs.getString("email");
+                creator = new Creator(usr, email, psw);
+            }
+
+            stmt.close();
+        } finally {
+            if(c != null) {
+                pool.releaseConnection(c);
+            }
+        }
+
+        return creator;
     }
 
     private ConnectionPool pool;
