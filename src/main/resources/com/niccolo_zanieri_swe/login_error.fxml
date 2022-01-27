@@ -16,7 +16,7 @@
                 <Font size="40.0" />
             </font>
         </Label>
-        <Label id="toLogInLabel" layoutX="832.0" layoutY="581.0" onMouseClicked="#switchToLogInError" text="Log in page">
+        <Label id="toLogInLabel" layoutX="832.0" layoutY="581.0" onMouseClicked="#switchToLogin" text="Log in page">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>

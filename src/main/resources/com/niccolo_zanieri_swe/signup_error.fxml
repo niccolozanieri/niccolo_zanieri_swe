@@ -16,7 +16,7 @@
                 <Font size="40.0" />
             </font>
         </Label>
-        <Label id="toSignUpLabel" layoutX="820.0" layoutY="581.0" onMouseClicked="#switchToSignUp" text="Sign up page">
+        <Label id="toSignUpLabel" layoutX="820.0" layoutY="581.0" onMouseClicked="#switchToSignup" text="Sign up page">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
