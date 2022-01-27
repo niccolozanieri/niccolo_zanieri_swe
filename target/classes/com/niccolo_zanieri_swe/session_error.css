@@ -1,3 +1,7 @@
 #toSignUpLabel:hover {
     -fx-text-fill: "#273c75";
 }
+
+#toLoginLabel:hover {
+    -fx-text-fill: "#273c75";
+}
