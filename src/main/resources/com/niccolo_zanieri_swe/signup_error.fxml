@@ -6,17 +6,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.niccolo_zanieri_swe.SessionController">
     <children>
-        <Label layoutX="340.0" layoutY="304.0" text="We are sorry but there was a problem with your request...">
+        <Label layoutX="269.0" layoutY="298.0" text="We are sorry but there was a problem with your request...">
             <font>
                 <Font size="46.0" />
             </font>
         </Label>
-        <Label layoutX="567.0" layoutY="472.0" text="You can go back to our home and try again:">
+        <Label layoutX="648.0" layoutY="486.0" text="You can go back and try again:">
             <font>
                 <Font size="40.0" />
             </font>
         </Label>
-        <Label id="toSignUpLabel" layoutX="836.0" layoutY="574.0" onMouseClicked="#switchToSignUp" text="Sign up page">
+        <Label id="toSignUpLabel" layoutX="820.0" layoutY="581.0" onMouseClicked="#switchToSignUp" text="Sign up page">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>

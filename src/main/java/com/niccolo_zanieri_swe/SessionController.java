@@ -1,5 +1,7 @@
 package com.niccolo_zanieri_swe;
 
+import com.niccolo_zanieri_swe.model.Creator;
+import com.niccolo_zanieri_swe.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,7 +52,7 @@ public class SessionController implements Initializable {
     @FXML
     public void switchToSuccessSignUpCr() throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("successful_signup_cr.fxml")));
-        stage = (Stage)(userTF.getScene().getWindow());
+        stage = (Stage)(signupUserTF.getScene().getWindow());
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("successful_signup.css")).toExternalForm());
         stage.setScene(scene);
@@ -60,7 +62,7 @@ public class SessionController implements Initializable {
     @FXML
     public void switchToSuccessSignUpCl() throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("successful_signup_cl.fxml")));
-        stage = (Stage)(userTF.getScene().getWindow());
+        stage = (Stage)(signupUserTF.getScene().getWindow());
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("successful_signup.css")).toExternalForm());
         stage.setScene(scene);
@@ -70,9 +72,31 @@ public class SessionController implements Initializable {
     @FXML
     public void switchToSignUpError() throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signup_error.fxml")));
-        stage = (Stage) (userTF.getScene().getWindow());
+        stage = (Stage) (signupUserTF.getScene().getWindow());
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("signup_error.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("session_error.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void switchToLogInError() throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login_error.fxml")));
+        stage = (Stage) (loginUserTF.getScene().getWindow());
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("session_error.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void switchToSuccLogIn(String usr) throws IOException {  // FIXME: method not working, can't load label
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("successful_login.fxml")));
+        root = loader.load();
+        SessionController sessionCtrl = loader.getController();
+        sessionCtrl.succLoginLabel.setText("Welcome back " + usr + "!!");
+        stage = (Stage) (loginUserTF.getScene().getWindow());
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -82,7 +106,7 @@ public class SessionController implements Initializable {
         if(creatorClientChB.getValue().equals("Creator")) {
             try {
                 CreatorAdminController creatorCtrl = new CreatorAdminController();
-                creatorCtrl.registerCreator(userTF.getText(), emailTF.getText(), pswTF.getText());
+                creatorCtrl.registerCreator(signupUserTF.getText(), signupEmailTF.getText(), sigupPswTF.getText());
                 switchToSuccessSignUpCr();
             } catch(SQLException e) {
                 switchToSignUpError();
@@ -90,7 +114,7 @@ public class SessionController implements Initializable {
         } else {
             try {
                 ClientAdminController clientCtrl = new ClientAdminController();
-                clientCtrl.registerClient(userTF.getText(), emailTF.getText(), pswTF.getText());
+                clientCtrl.registerClient(signupUserTF.getText(), signupEmailTF.getText(), sigupPswTF.getText());
                 switchToSuccessSignUpCl();
             } catch(SQLException e) {
                 switchToSignUpError();
@@ -98,13 +122,39 @@ public class SessionController implements Initializable {
         }
     }
 
+    @FXML
+    public void login(MouseEvent event) throws IOException {
+        User user = null;
+        try {
+            CreatorAdminController creatorCtrl = new CreatorAdminController();
+            user = creatorCtrl.findCreator(loginUserTF.getText(), loginPswTF.getText());
+        } catch(SQLException e) {
+            switchToLogInError();
+        } catch(IllegalArgumentException e) {
+            try {
+                ClientAdminController clientCtrl = new ClientAdminController();
+                user = clientCtrl.findClient(loginUserTF.getText(), loginPswTF.getText());
+            } catch(SQLException | IllegalArgumentException e1) {
+                switchToLogInError();
+            }
+        }
+
+        switchToSuccLogIn(loginUserTF.getText());
+    }
+
+
+
     @FXML private ChoiceBox<String> creatorClientChB = new ChoiceBox<>();
     private String[] userTypes = {"Creator", "Client"};
 
-    @FXML private TextField userTF;
-    @FXML private TextField emailTF;
-    @FXML private TextField pswTF;
+    @FXML private TextField signupUserTF;
+    @FXML private TextField signupEmailTF;
+    @FXML private TextField sigupPswTF;
 
+    @FXML private TextField loginUserTF;
+    @FXML private TextField loginPswTF;
+
+    @FXML private Label succLoginLabel;
 
     private Stage stage;
     private Scene scene;

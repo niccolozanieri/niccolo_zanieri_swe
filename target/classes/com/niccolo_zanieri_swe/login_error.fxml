@@ -11,12 +11,12 @@
                 <Font size="46.0" />
             </font>
         </Label>
-        <Label layoutX="648.0" layoutY="486.0" text="You can go back and try again:">
+        <Label layoutX="641.0" layoutY="496.0" text="You can go back and try again:">
             <font>
                 <Font size="40.0" />
             </font>
         </Label>
-        <Label id="toSignUpLabel" layoutX="820.0" layoutY="581.0" onMouseClicked="#switchToSignUp" text="Sign up page">
+        <Label id="toLogInLabel" layoutX="832.0" layoutY="581.0" onMouseClicked="#switchToLogInError" text="Log in page">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>

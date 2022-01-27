@@ -39,14 +39,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ButtonBar>
-            <TextField focusTraversable="false" layoutX="609.0" layoutY="470.0" prefHeight="32.0" prefWidth="187.0" promptText="password" />
-            <TextField focusTraversable="false" layoutX="609.0" layoutY="425.0" prefHeight="32.0" prefWidth="187.0" promptText="username or email" />
+            <TextField fx:id="loginPswTF" focusTraversable="false" layoutX="609.0" layoutY="470.0" prefHeight="32.0" prefWidth="187.0" promptText="password" />
+            <TextField fx:id="loginUserTF" focusTraversable="false" layoutX="609.0" layoutY="425.0" prefHeight="32.0" prefWidth="187.0" promptText="username" />
             <Label layoutX="564.0" layoutY="191.0" text="Tivity" textFill="#2f3640">
                <font>
                   <Font name="DejaVu Serif Bold" size="88.0" />
                </font>
             </Label>
-            <Button focusTraversable="false" layoutX="609.0" layoutY="528.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="187.0" text="Login" />
+            <Button focusTraversable="false" layoutX="609.0" layoutY="528.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="24.0" prefWidth="187.0" text="Login">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </AnchorPane>
    </children>
