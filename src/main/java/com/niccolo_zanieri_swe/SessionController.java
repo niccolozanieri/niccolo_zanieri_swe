@@ -89,7 +89,7 @@ public class SessionController implements Initializable {
     }
 
     @FXML
-    public void switchToSuccLogin(String usr) throws IOException {  // FIXME: method not working, can't load label
+    public void switchToSuccLogin(String usr) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("successful_login.fxml")));
         root = loader.load();
         SessionController sessionCtrl = loader.getController();
@@ -105,7 +105,7 @@ public class SessionController implements Initializable {
         if(creatorClientChB.getValue().equals("Creator")) {
             try {
                 CreatorAdminController creatorCtrl = new CreatorAdminController();
-                creatorCtrl.registerCreator(signupUserTF.getText(), signupEmailTF.getText(), sigupPswTF.getText());
+                creatorCtrl.registerCreator(signupUserTF.getText(), signupEmailTF.getText(), signupPswTF.getText());
                 switchToSuccessSignupCr();
             } catch(SQLException e) {
                 switchToSignupError();
@@ -113,7 +113,7 @@ public class SessionController implements Initializable {
         } else {
             try {
                 ClientAdminController clientCtrl = new ClientAdminController();
-                clientCtrl.registerClient(signupUserTF.getText(), signupEmailTF.getText(), sigupPswTF.getText());
+                clientCtrl.registerClient(signupUserTF.getText(), signupEmailTF.getText(), signupPswTF.getText());
                 switchToSuccessSignupCl();
             } catch(SQLException e) {
                 switchToSignupError();
@@ -148,7 +148,7 @@ public class SessionController implements Initializable {
 
     @FXML private TextField signupUserTF;
     @FXML private TextField signupEmailTF;
-    @FXML private TextField sigupPswTF;
+    @FXML private TextField signupPswTF;
 
     @FXML private TextField loginUserTF;
     @FXML private TextField loginPswTF;

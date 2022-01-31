@@ -1,5 +1,6 @@
 module com.example.niccolo_zanieri_swe {
     requires javafx.controls;
+    requires javafx.graphics;
     requires javafx.fxml;
     requires java.sql;
 

@@ -11,7 +11,7 @@
                 <Font size="46.0" />
             </font>
         </Label>
-        <Label layoutX="648.0" layoutY="486.0" text="You can go back and try again:">
+        <Label id="signupTryAgainLabel" layoutX="648.0" layoutY="486.0" text="You can go back and try again:">
             <font>
                 <Font size="40.0" />
             </font>

@@ -11,7 +11,7 @@
             <Font size="46.0" />
          </font>
       </Label>
-      <Label layoutX="728.0" layoutY="470.0" text="Go and start creating:">
+      <Label  id="succCrSignupLabel" layoutX="728.0" layoutY="470.0" text="Go and start creating:">
          <font>
             <Font size="40.0" />
          </font>

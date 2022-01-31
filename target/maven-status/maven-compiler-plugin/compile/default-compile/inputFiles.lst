@@ -1,0 +1,13 @@
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/model/Creator.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/model/User.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/MainApp.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/SessionController.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/model/EmploymentProposal.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/model/Client.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/dao/CreatorDAO.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/dao/ConnectionPool.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/CreatorAdminController.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/module-info.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/ClientAdminController.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/dao/ClientDAO.java
+/home/niccolo/Dev/niccolo_zanieri_swe/src/main/java/com/niccolo_zanieri_swe/model/Post.java
