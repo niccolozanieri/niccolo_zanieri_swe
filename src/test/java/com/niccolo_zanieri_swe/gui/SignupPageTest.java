@@ -11,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
@@ -21,6 +23,7 @@ import org.testfx.framework.junit5.Start;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(ApplicationExtension.class)
 public class SignupPageTest {
 
@@ -162,5 +165,8 @@ public class SignupPageTest {
         Assertions.assertThat(robot.lookup("#submitButton").queryAs(Button.class)).hasText("Submit");
     }
 
-
+    @AfterAll
+    void tearDown() {
+        pool.releaseEveryConnection();
+    }
 }

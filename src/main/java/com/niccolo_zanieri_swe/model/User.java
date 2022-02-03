@@ -42,15 +42,21 @@ public abstract class User {
     }
 
     public Map<Tags, Integer> getLikesPerTag() {
-        return likesPerTag;
+        Map<Tags, Integer> clone = new EnumMap<>(Tags.class);
+        clone.putAll(this.likesPerTag);
+        return clone;
     }
 
-     Hashtable<String, User> getFollowed() {
-        return followed;
+     public Hashtable<String, User> getFollowed() {
+        Hashtable<String, User> clone = new Hashtable<>(this.followed.size());
+        clone.putAll(this.followed);
+        return clone;
     }
 
     public ArrayList<Tags> getFavouriteTags() {
-        return favouriteTags;
+        ArrayList<Tags> clone = new ArrayList<>(this.favouriteTags.size());
+        clone.addAll(this.favouriteTags);
+        return clone;
     }
 
     public String getUsername() {

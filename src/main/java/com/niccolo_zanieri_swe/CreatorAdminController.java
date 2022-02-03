@@ -5,7 +5,6 @@ import com.niccolo_zanieri_swe.dao.CreatorDAO;
 import com.niccolo_zanieri_swe.model.Creator;
 import javafx.fxml.FXML;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreatorAdminController {
