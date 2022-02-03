@@ -98,7 +98,6 @@ public class ClientDAOTest {
         }
     }
 
-    //    should I put the following two tests in another class?
     @Test
     void followCreatorTest() {
         Connection c = null;

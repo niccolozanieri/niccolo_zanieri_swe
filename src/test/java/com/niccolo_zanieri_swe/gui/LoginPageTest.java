@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
@@ -20,7 +22,7 @@ import org.testfx.framework.junit5.Start;
 import java.sql.SQLException;
 import java.util.Objects;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(ApplicationExtension.class)
 class LoginPageTest {
 
@@ -138,6 +140,8 @@ class LoginPageTest {
         Assertions.assertThat(robot.lookup("#toLoginLabel").queryAs(Label.class)).hasText("Log in page");
     }
 
-
-
+    @AfterAll
+    void tearDown() {
+        pool.releaseEveryConnection();
+    }
 }

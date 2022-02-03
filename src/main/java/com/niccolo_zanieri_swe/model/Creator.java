@@ -36,7 +36,9 @@ public class Creator extends User {
     }
 
     public ArrayList<Specializations> getSpecializations() {
-        return specializations;
+        ArrayList<Specializations> clone = new ArrayList<>(this.specializations.size());
+        clone.addAll(this.specializations);
+        return clone;
     }
 
     public boolean receiveProposal(EmploymentProposal proposal) {
@@ -47,7 +49,6 @@ public class Creator extends User {
         this.proposals.add(proposal);
         return true;
     }
-
 
 
     private ArrayList<Specializations> specializations = new ArrayList<>();
