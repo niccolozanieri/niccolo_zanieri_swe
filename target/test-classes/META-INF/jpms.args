@@ -1,0 +1,4 @@
+--patch-module
+com.example.niccolo_zanieri_swe=_
+--add-reads
+com.example.niccolo_zanieri_swe=ALL-UNNAMED

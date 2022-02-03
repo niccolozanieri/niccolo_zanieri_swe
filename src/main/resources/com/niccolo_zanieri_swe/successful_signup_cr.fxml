@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.niccolo_zanieri_swe.SessionController">
+   <children>
+      <Label layoutX="514.0" layoutY="314.0" text="Congratulations!! Now you're one of Us.">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Label>
+      <Label  id="succCrSignupLabel" layoutX="728.0" layoutY="470.0" text="Go and start creating:">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label id="toLoginLabel" layoutX="832.0" layoutY="572.0" onMouseClicked="#switchToLogin" text="Log in now">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
