@@ -47,10 +47,8 @@ public abstract class User {
         return clone;
     }
 
-     public Hashtable<String, User> getFollowed() {
-        Hashtable<String, User> clone = new Hashtable<>(this.followed.size());
-        clone.putAll(this.followed);
-        return clone;
+    Hashtable<String, User> getFollowed() {
+        return followed;
     }
 
     public ArrayList<Tags> getFavouriteTags() {
